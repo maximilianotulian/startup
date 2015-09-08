@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Maximiliano Tulian"/>
+    <meta name="description" content="Exercise 1.6" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login form</title>
+</head>
+<body>
+    <section>
+        <form id="form-user"  action="" method="post">
+            <label for="txt-first-name">First Name</label>
+            <input type="text" name="txt-first-name" id="txt-first-name" pattern="[a-zA-Z]*" required autofocus/>
+            <br>
+
+            <label for="txt-last-name">Last Name</label>
+            <input type="text" name="txt-last-name" id="txt-last-name" pattern="[a-zA-Z]*" required/>
+            <br>
+
+            <label for="txt-email">Email</label>
+            <input type="email" name="txt-email" id="txt-email" placeholder="example@ex.com" required/>
+            <br>
+
+            <label for="txt-birthday">Birthday</label>
+            <input type="date" name="txt-birthday" id="txt-birthday" min="1915-01-01" required>
+            <br>
+            <!-- The min attribute of the input tag is not supported in Internet Explorer 9 and earlier versions, or in Firefox.-->
+
+            <label for="lst-sports">Select your favorite sport</label>
+            <select id="lst-sports" name="lst-sports">
+                <option value="1" selected>Calisthenics</option>
+                <option value="2">Footbal</option>
+                <option value="3">Voleyball</option>
+                <option value="4">Handball</option>
+            </select>
+            <br>
+            <!--  The datalist tag is not supported in Internet Explorer 9 and earlier versions, or in Safari.</p>-->
+            <label for="txt-bio"></label>
+            <textarea id="txt-bio" name="txt-bio" placeholder="Please write a small biography of yourself" required></textarea>
+            <br>
+
+            <input type="submit" value="Sign Up">
+            <input type="reset" value="clear">
+
+        </form>
+    </section>
+</body>
+</html>
