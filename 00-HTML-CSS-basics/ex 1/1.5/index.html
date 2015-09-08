@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Maximiliano Tulian"/>
+    <meta name="description" content="Exercise 1.5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image, video and a sound</title>
+</head>
+<body>
+    <header>
+        <h1>Multimedia</h1>
+    </header>
+    <section>
+        <article>
+            <h2>Image</h2>
+            <p>An Enigma machine was a series of electro-mechanical rotor cipher machines</p>
+            <img src="../resourses/img/cipher-machine.jpg" alt="This is a photo of the enigma cipher machine" title="Enigma machine" longdesc="https://en.wikipedia.org/wiki/Enigma_machine">
+        </article>
+        <article>
+            <h2>Video</h2>
+            <p>The next video tell about the symmetric key cipher</p>
+            <video controls>
+                <source src="../resourses/video/symmetric-cipher.mp4"  type="video/mp4; codecs=avc1.42E01E,mp4a.40.2">
+                <source src="../resourses/video/symmetric-cipher.webm" type="video/webm; codecs=vp8,vorbis">
+                <source src="../resourses/video/symmetric-cipher.ogv"  type="video/ogg; codecs=theora,vorbis">
+                Your browser does not support the video element.
+            </video>
+        </article>
+        <article>
+            <h2>Audio</h2>
+            <p>The next audio tell about the hash ciphers</p>
+            <audio controls>
+                <source src="../resourses/sound/cipher-hash.ogg" type="audio/ogg">
+                <source src="../resourses/sound/cipher-hash.wav" type="audio/wav">
+                <source src="../resourses/sound/cipher-hash.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </article>
+    </section>
+</body>
+</html>
