@@ -1,0 +1,64 @@
+*,
+*:before,
+*:after{
+     box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+html{
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+    text-align: center;
+}
+
+body{
+    width: 100%;
+}
+
+header{
+    width: 100%;
+}
+
+.header{
+    font-size: 46px;
+}
+
+.footer,
+.sidebar{
+    font-size: 10px;
+}
+
+.navigation{
+    font-size: 12px;
+}
+
+.content{
+    font-size: 14px;
+    width: 50%;
+}
+
+.navigation,
+.sidebar{
+    width: 25%;
+}
+
+[class$="r"]{
+    background-color: magenta;
+}
+
+[class*="a"]:not([class$="r"]){
+    background-color: blue;
+}
+
+.header,
+.footer{
+    display: block;
+}
+
+.content,
+.navigation,
+.sidebar{
+    float: left;
+    height: 300px;
+}
