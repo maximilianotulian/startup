@@ -1,7 +1,19 @@
+*{
+ box-sizing: border-box;
+}
+
 html{
     font-family: "Times New Roman", Times, serif;
     font-size: 14px;
     text-align: center;
+}
+
+body{
+    width: 100%;
+}
+
+header{
+    width: 100%;
 }
 
 .header{
@@ -13,12 +25,18 @@ html{
     font-size: 10px;
 }
 
-.content{
-    font-size: 14px;
-}
-
 .navigation{
     font-size: 12px;
+}
+
+.content{
+    font-size: 14px;
+    width: 50%;
+}
+
+.navigation,
+.sidebar{
+    width: 25%;
 }
 
 [class$="r"]{
@@ -32,13 +50,11 @@ html{
 .header,
 .footer{
     display: block;
-    padding: 20px;
 }
 
 .content,
 .navigation,
 .sidebar{
-    display: inline-block;
-    width: 31%;
-    padding: 7px;
+    float: left;
+    height: 300px;
 }
