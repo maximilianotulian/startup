@@ -1,0 +1,20 @@
+.gallery-grid{
+    clear: both;
+    background: orange;
+    display: block;
+    float: left;
+    width: 100%;
+    padding: 8px;
+}
+
+.gallery-grid.columns {
+    margin-right: 0;
+}
+
+.one-third{
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.one-third img{
+    width: 100%;
+}
