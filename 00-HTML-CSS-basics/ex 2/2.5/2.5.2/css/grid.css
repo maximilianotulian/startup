@@ -1,4 +1,6 @@
-*, *:before, *:after {
+*,
+*:before,
+*:after {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -6,9 +8,6 @@
     Borders and padding are drawn inside the set width of your countent
     The margin is drawn outside*/
 }
-
-/* Small screens (default) */
-html { font-size: 100%; }
 
 /* Medium screens (640px) */
 @media (min-width: 40rem) {
