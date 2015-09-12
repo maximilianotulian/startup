@@ -1,20 +1,53 @@
-.gallery-grid{
+*,
+*:before,
+*:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    /* with box-sizing: border-box
+    Borders and padding are drawn inside the set width of your countent
+    The margin is drawn outside*/
+}
+
+.both {
     clear: both;
-    background: orange;
+}
+
+.container {
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    background-color: orange;
+    text-align: center;
+}
+
+.content {
+    margin: 10px;
     display: block;
     float: left;
-    width: 100%;
-    padding: 8px;
+    position: relative;
+    width: 30%;
 }
 
-.gallery-grid.columns {
-    margin-right: 0;
-}
-
-.one-third{
-    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);
-}
-
-.one-third img{
+.content img{
+    height: 100%;
     width: 100%;
 }
+.screen {
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-color: rgba(0,0,0,0.5);
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.screen:hover {
+    opacity: 1;
+}
+
+.title {
+    color: white;
+}
+
