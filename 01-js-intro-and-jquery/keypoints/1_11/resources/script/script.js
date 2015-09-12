@@ -8,6 +8,18 @@ var onPageReady = function () {
     var showComplete;
     var listLenght;
     var listAlbums;
+    var showAlbum;
+
+    showAlbum = function(album){
+
+    };
+    showError = function(xmlHttpRequest,errorText,objectException) {
+        window.alert('error');
+    };
+
+    showComplete = function(xmlHttpRequest,result) {
+        window.alert('complete');
+    };
 
     processRequest = function(result) {
         listLenght = result.albums.items.length;
@@ -16,20 +28,14 @@ var onPageReady = function () {
         window.alert('succes');
         console.log(result);
         if(listLenght){
-            $.each(listAlbums, function(i,a){
-                console.log('album: ' + i+ 'album-name: '+ a.name +'\n');
+            $.each(listAlbums, function(index,album){
+                showAlbum(album);
             })
         }
 
     };
 
-    showError = function(xmlHttpRequest,errorText,objectException) {
-        window.alert('error');
-    };
 
-    showComplete = function(xmlHttpRequest,result) {
-        window.alert('complete');
-    };
 
     $.ajax({
             url:'https://api.spotify.com/v1/search?',
