@@ -22,11 +22,10 @@
 }
 
 .content {
-    margin: 10px;
+    margin: 8px;
     display: block;
     float: left;
     position: relative;
-    width: 30%;
 }
 
 .content img{

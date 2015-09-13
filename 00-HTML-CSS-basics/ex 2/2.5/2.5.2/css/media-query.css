@@ -1,0 +1,32 @@
+
+
+/*==========  Mobile First Method  ==========*/
+
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width : 480px) {
+    .content {
+        width: 50%;
+    }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+    .content {
+        width: 40%;
+    }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+    .content {
+        width: 30%;
+    }
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+    .content {
+        width: 30%;
+    }
+}
