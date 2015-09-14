@@ -6,33 +6,37 @@ var onPageReady = function () {
     var processRequest;
     var showError;
     var showComplete;
-    var listLenght;
-    var listAlbums;
+    var listLength;
+    var albums;
 
-    processRequest = function(result) {
-        listLenght = result.albums.items.length;
-        listAlbums = result.albums.items;
+    processRequest = function (result) {
+        listLength = result.albums.items.length;
+        albums = result.albums.items;
 
-        window.alert('succes');
+        //window.alert('succes');
         console.log(result);
-        if(listLenght){
-            $.each(listAlbums, function(i,a){
-                console.log('album: ' + i+ 'album-name: '+ a.name +'\n');
+        if (listLength) {
+            $.each(albums, function (i,a) {
+                $.('<label>' , {
+                    html:'Name:',
+
+                });
+                console.log('album: ' + i+ 'album-name: '+ a.name + '\n');
             })
         }
 
     };
 
-    showError = function(xmlHttpRequest,errorText,objectException) {
+    showError = function (xmlHttpRequest, errorText, objectException) {
         window.alert('error');
     };
 
-    showComplete = function(xmlHttpRequest,result) {
-        window.alert('complete');
+    showComplete = function (xmlHttpRequest, result) {
+        //window.alert('complete');
     };
 
     $.ajax({
-            url:'https://api.spotify.com/v1/search?',
+            url: 'https://api.spotify.com/v1/search?',
             type: 'get',
             dataType: 'json',
             data: {

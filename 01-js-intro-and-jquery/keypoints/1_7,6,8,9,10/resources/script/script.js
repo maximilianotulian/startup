@@ -13,8 +13,6 @@ var onPageReady = function () {
         input.focus();
     });
 
-
-
     button.click(function () {
         var inputValue = input.val() || 'guest';
 
@@ -23,7 +21,7 @@ var onPageReady = function () {
             success: function (result) {
                 section.text(result.response);
             },
-            error: function (a, b, c) {
+            error: function (request, errorTest, objectException) {
                 section.addClass('has-error');
                 section.text('not found');
             }
