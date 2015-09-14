@@ -8,19 +8,7 @@ var onPageReady = function () {
     var showComplete;
     var listLength;
     var albums;
-    var showAlbum;
 
-    showAlbum = function(album){
-
-    };
-
-    showError = function(xmlHttpRequest,errorText,objectException) {
-        window.alert('error');
-    };
-
-    showComplete = function(xmlHttpRequest,result) {
-        window.alert('complete');
-    };
 
     processRequest = function (result) {
         listLength = result.albums.items.length;
@@ -36,8 +24,8 @@ var onPageReady = function () {
 
                 });
                 console.log('album: ' + i + 'album-name: ' + a.name + '\n');
-            }
-1       }
+            });
+        }
     };
 
 
@@ -63,6 +51,7 @@ var onPageReady = function () {
         }
     );
 };
+
 $(document).on('ready', onPageReady);
 
 
