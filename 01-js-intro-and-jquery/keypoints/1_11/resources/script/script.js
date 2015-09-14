@@ -3,38 +3,47 @@
  */
 
 var onPageReady = function () {
-    var processRequest;
-    var showError;
-    var showComplete;
+    var onRequestSuccess;
+    var onRequestError;
     var listLength;
     var albums;
+    var appendAlbum;
+    var container = $('.container');
+
+    appendAlbum = function (album) {
+        var albumItem = $('<article></article>');
+        var albumName   = $('<h3>Name: ' +album.name+ ' </h3>');
+        var albumType   = $('<h4>Type: '+album.album_type+'</h4>');
+        var albumImage = $('<img src="'+album.images[1].url+'" alt="This image show the photo of album called: '+album.name+'" />');
+
+        // var albumReleaseDate = ""; The guide ask for this attribute but i don't find it.
+        var albumLink = $('<p> <a href=" '+album.external_urls.spotify+'"> Play the music!</a> </p>');
+
+        albumItem.append(albumName,albumType,albumImage,albumLink);
+        container.append(albumItem);
+    }
 
 
-    processRequest = function (result) {
+    onRequestSuccess = function (result) {
+
         listLength = result.albums.items.length;
         albums = result.albums.items;
 
-        //window.alert('succes');
         console.log(result);
 
         if (listLength) {
-            $.each(albums, function (i,a) {
-                $.('<label>' , {
-                    html: 'Name:',
-
-                });
-                console.log('album: ' + i + 'album-name: ' + a.name + '\n');
+            $.each(albums, function (index, album) {
+                //append each album in the section container
+                appendAlbum(album);
             });
+        }
+        else {
+            container.append('<p>Album not found </p>');
         }
     };
 
-
-    showError = function (xmlHttpRequest, errorText, objectException) {
-        window.alert('error');
-    };
-
-    showComplete = function (xmlHttpRequest, result) {
-        //window.alert('complete');
+    onRequestError = function (xhr, status, error) {
+        container.append('<p>Something went wrong '+status+' '+error+'</p>');
     };
 
     $.ajax({
@@ -45,9 +54,8 @@ var onPageReady = function () {
                 q: 'Rolling Stones',
                 type: 'album'
             },
-            success: processRequest,
-            error: showError,
-            complete: showComplete
+            success: onRequestSuccess,
+            error: onRequestError
         }
     );
 };
