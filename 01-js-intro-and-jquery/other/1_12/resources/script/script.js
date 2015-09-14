@@ -3,7 +3,7 @@
  */
 var onClickButton =  function () {
 
-    $('#btnSearch').on('click',onPageReady);
+    $('#btnSearch').on('click', onPageReady);
 
 };
 
@@ -52,7 +52,10 @@ var onPageReady = function () {
     };
 
     onRequestError = function (xhr, status, error) {
-        container.append('<p>Something went wrong '+status+' '+error+'</p>');
+        var badRequest = $('<article></article>');
+        badRequest.append('<h3>'+ status +'</h3>');
+        badRequest.append('<p>Something went wrong: '+ error +'</p>');
+        container.append(badRequest);
     };
 
     $.ajax({
