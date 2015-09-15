@@ -1,11 +1,7 @@
 /**
  * Created by MaximilianoDaniel on 11/09/2015.
  */
-var onClickButton =  function () {
 
-    $('#btnSearch').on('click', onPageReady);
-
-};
 
 var onPageReady = function () {
     var container = $('#albumList');
@@ -14,10 +10,8 @@ var onPageReady = function () {
     var listLength;
     var albums;
     var appendAlbum;
-    var $input = $('#txtArtist').val();
-
-    //Clean the container in each search
-    container.empty();
+    var $input;
+    var onButtonClick;
 
     appendAlbum = function (album) {
         var albumItem = $('<article></article>');
@@ -30,8 +24,7 @@ var onPageReady = function () {
 
         albumItem.append(albumName,albumType,albumImage,albumLink);
         container.append(albumItem);
-    }
-
+    };
 
     onRequestSuccess = function (result) {
 
@@ -58,21 +51,33 @@ var onPageReady = function () {
         container.append(badRequest);
     };
 
-    $.ajax({
-            url: 'https://api.spotify.com/v1/search?',
-            type: 'get',
-            dataType: 'json',
-            data: {
-                q: $input,
-                type: 'album'
-            },
-            success: onRequestSuccess,
-            error: onRequestError
-        }
-    );
+    onButtonClick =  function () {
+
+        $input = $('#txt-artist').val();
+
+        //Clean the container in each search
+        container.empty();
+
+        $.ajax({
+                url: 'https://api.spotify.com/v1/search',
+                type: 'get',
+                dataType: 'json',
+                data: {
+                    q: $input,
+                    type: 'album'
+                },
+                success: onRequestSuccess,
+                error: onRequestError
+            }
+        );
+
+    };
+
+    $('#btnSearch').on('click', onButtonClick);
+
 };
 
-$(document).on('ready', onClickButton);
+$(document).on('ready', onPageReady());
 
 
 
