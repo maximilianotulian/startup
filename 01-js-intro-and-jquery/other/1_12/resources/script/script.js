@@ -14,7 +14,7 @@ var onPageReady = function () {
     var onButtonClick;
 
     appendAlbum = function (album) {
-        var albumItem = $('<article></article>');
+        var albumItem = $('<article>');
         var albumName   = $('<h3>Name: ' +album.name+ ' </h3>');
         var albumType   = $('<h4>Type: '+album.album_type+'</h4>');
         var albumImage = $('<img src="'+album.images[1].url+'" alt="This image show the photo of album called: '+album.name+'" />');
@@ -45,7 +45,7 @@ var onPageReady = function () {
     };
 
     onRequestError = function (xhr, status, error) {
-        var badRequest = $('<article></article>');
+        var badRequest = $('<article>');
         badRequest.append('<h3>'+ status +'</h3>');
         badRequest.append('<p>Something went wrong: '+ error +'</p>');
         container.append(badRequest);
