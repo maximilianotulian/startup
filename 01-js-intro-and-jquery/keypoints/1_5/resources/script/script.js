@@ -4,6 +4,6 @@
 
 $(document).ready(function () {
 
-    $('#section-hide').fadeIn('normal');
+    $('.hidden').fadeIn('normal');
 
 });

@@ -5,7 +5,6 @@
 var onPageReady = function () {
     var onRequestSuccess;
     var onRequestError;
-    var albums;
     var appendAlbum;
     var container = $('.container');
 
@@ -25,19 +24,17 @@ var onPageReady = function () {
 
     onRequestSuccess = function (result) {
 
-        var listLength = result.albums.items.length;
-        albums = result.albums.items;
+        var albums = result.albums.items;
 
         console.log(result);
 
-        if (listLength) {
+        if (result.albums.items.length) {
             $.each(albums, function (index, album) {
 
                 //append each album in the section container
                 appendAlbum(album);
             });
-        }
-        else {
+        } else {
             container.append('<p>Album not found </p>');
         }
     };
