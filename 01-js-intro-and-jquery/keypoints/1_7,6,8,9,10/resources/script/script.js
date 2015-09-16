@@ -13,7 +13,7 @@ var onPageReady = function () {
         input.focus();
     });
 
-    button.click(function () {
+    button.on('click', function () {
         var inputValue = input.val() || 'guest';
 
         $.ajax({
