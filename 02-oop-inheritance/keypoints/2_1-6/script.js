@@ -41,32 +41,31 @@ ObserverList.prototype.subscribe = function (observer) {
 };
 
 ObserverList.prototype.unsubscribe = function (observer) {
-    var i = 0;
+    var observerIndex = 0;
 
-    for( i ; i < this.observerList.length ; i++ ){
-        if( this.observerList[i] === observer ){
-            this.observerList.slice(i,1);
+    for (observerIndex ; observerIndex < this.observerList.length ; observerIndex++) {
+        if (this.observerList[observerIndex] === observer) {
+            this.observerList.slice(observerIndex, 1);
             break;
         }
     }
 };
 
 ObserverList.prototype.publish = function (action) {
-    var index = 0;
+    var observerIndex = 0;
 
-    for( index ; index < this.observerList.length ; index++ ) {
-        for( var j = 0 ; j < this.observerList[index].listenTo.length ; j++ ) {
-            if( this.observerList[index].listenTo[j] === action ) {
-                    if ( action === 'play' ) {
-                        this.observerList[index].play(this);
+    for (observerIndex ; observerIndex < this.observerList.length ; observerIndex++) {
+        for (var listenToIndex = 0 ; j < this.observerList[observerIndex].listenTo.length ; listenToIndex++) {
+            if (this.observerList[observerIndex].listenTo[listenToIndex] === action) {
+                    if (action === 'play') {
+                        this.observerList[observerIndex].play(this);
                     } else if (action === 'stop') {
-                        this.observerList[index].stop(this);
+                        this.observerList[observerIndex].stop(this);
                     }
             }
         }
     }
 };
-
 
 //Constructor and prototype pattern
 var Movie = function (title, genre, rating ) {
@@ -97,7 +96,6 @@ Movie.prototype.set = function(key, value) {
 Movie.prototype.stop = function () {
     this.publish('stop');
 };
-
 
 //Movies to play in the console
 var superman = new Movie('superman', 'drama', 4);
