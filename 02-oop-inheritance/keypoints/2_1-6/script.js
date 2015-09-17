@@ -1,16 +1,24 @@
 /**
  * Created by MaximilianoDaniel on 15/09/2015.
- */
-var inheritPrototype = function (child, parent){
+ * Exercises done
+ * 1- Create a Movie object
+ * 2- Instantiate some of your favorite movies and play with them in the console.
+ * 3- Add a MovieObserver class that listen for "playing" and "sttoped" events
+ * 4- Publish "playing" event on Movie.play()
+ * 5- Publish "stopped" event on Movie.stop()
+ * 6- Log to console when each event is fired
+ * */
 
-    var copyOfParent = Object.create(parent.prototype);
+var inheritPrototype = function (childClass, parentClass){
 
-    //Is necessary to point to the childObject constructor
-    copyOfParent = child;
-    child.prototype = copyOfParent;
+    var copyOfParent = Object.create(parentClass.prototype);
+
+    //Is necessary to point to the childClass constructor
+    copyOfParent.constructor = childClass;
+    childClass.prototype = copyOfParent;
 };
 
-//MovieObserver can listen to some action Like play or stop
+//MovieObserver can listen one or more actions like play or stop
 var MovieObserver = function (listenTo) {
     this.listenTo = listenTo || [] ;
 };
@@ -23,6 +31,7 @@ MovieObserver.prototype.stop = function (movie) {
     console.log('Stopped: ' + movie.title);
 };
 
+//The observerList can publish the actions in your own list of observer
 var ObserverList = function () {
   this.observerList = [];
 };
@@ -34,33 +43,28 @@ ObserverList.prototype.subscribe = function (observer) {
 ObserverList.prototype.unsubscribe = function (observer) {
     var i = 0;
 
-    while( i < this.observerList.length ){
+    for( i ; i < this.observerList.length ; i++ ){
         if( this.observerList[i] === observer ){
             this.observerList.slice(i,1);
-            break; }
-        i++;
+            break;
+        }
     }
-    return -1;
-};
-
-ObserverList.prototype.get = function (index) {
-    if ( index > -1 && index < this.observerList.length) {
-        return this.observerList[index];}
 };
 
 ObserverList.prototype.publish = function (action) {
     var index = 0;
 
-    for(index; this.observerList.length ; index++) {
-        if( this.observerList[index].listenTo === action ) {
-            switch( action ){
-                case 'play ' :
-                {   this.observerList[index].play(this);
-                    break;}
-                case 'stop' : {
-                    this.observerList[index].stop(this);
-                    break; }
-            }}}
+    for( index ; index < this.observerList.length ; index++ ) {
+        for( var j = 0 ; j < this.observerList[index].listenTo.length ; j++ ) {
+            if( this.observerList[index].listenTo[j] === action ) {
+                    if ( action === 'play' ) {
+                        this.observerList[index].play(this);
+                    } else if (action === 'stop') {
+                        this.observerList[index].stop(this);
+                    }
+            }
+        }
+    }
 };
 
 
@@ -99,11 +103,17 @@ Movie.prototype.stop = function () {
 var superman = new Movie('superman', 'drama', 4);
 var harryPotter = new Movie('harry potter', 'ficcion', 5);
 
-var movieObs1 = new MovieObserver('play');
-var movieObs2 = new MovieObserver('stop');
+//MovieObserver to adds in the movie
+var movieObs1 = new MovieObserver(['play','stop']);
+var movieObs2 = new MovieObserver(['stop']);
 
-console.log(superman);
+//Subscribe the movieObservers
 superman.subscribe(movieObs1);
-//harryPotter.subscribe(movieObs2);
+harryPotter.subscribe(movieObs2);
 
+//Play with the console :)
+superman.play();
+superman.stop();
+harryPotter.play();
+harryPotter.stop();
 
