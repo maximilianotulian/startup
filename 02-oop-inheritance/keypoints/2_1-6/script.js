@@ -36,6 +36,22 @@ var ObserverList = function () {
   this.observerList = [];
 };
 
+ObserverList.prototype.publish = function (action) {
+    var observerIndex = 0;
+
+    for (observerIndex ; observerIndex < this.observerList.length ; observerIndex++) {
+        for (var listenToIndex = 0 ; listenToIndex < this.observerList[observerIndex].listenTo.length ; listenToIndex++) {
+            if (this.observerList[observerIndex].listenTo[listenToIndex] === action) {
+                    if (action === 'play') {
+                        this.observerList[observerIndex].play(this);
+                    } else if (action === 'stop') {
+                        this.observerList[observerIndex].stop(this);
+                    }
+            }
+        }
+    }
+};
+
 ObserverList.prototype.subscribe = function (observer) {
     this.observerList.push(observer);
 };
@@ -51,21 +67,6 @@ ObserverList.prototype.unsubscribe = function (observer) {
     }
 };
 
-ObserverList.prototype.publish = function (action) {
-    var observerIndex = 0;
-
-    for (observerIndex ; observerIndex < this.observerList.length ; observerIndex++) {
-        for (var listenToIndex = 0 ; j < this.observerList[observerIndex].listenTo.length ; listenToIndex++) {
-            if (this.observerList[observerIndex].listenTo[listenToIndex] === action) {
-                    if (action === 'play') {
-                        this.observerList[observerIndex].play(this);
-                    } else if (action === 'stop') {
-                        this.observerList[observerIndex].stop(this);
-                    }
-            }
-        }
-    }
-};
 
 //Constructor and prototype pattern
 var Movie = function (title, genre, rating ) {
