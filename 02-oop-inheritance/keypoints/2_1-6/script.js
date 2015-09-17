@@ -11,7 +11,7 @@ var inheritPrototype = function (child, parent){
 };
 
 //MovieObserver can listen to some action Like play or stop
-var MovieObserver = function(listenTo) {
+var MovieObserver = function (listenTo) {
     this.listenTo = listenTo || [] ;
 };
 
@@ -27,12 +27,13 @@ var ObserverList = function () {
   this.observerList = [];
 };
 
-ObserverList.prototype.suscribe = function suscribe(observer) {
+ObserverList.prototype.subscribe = function (observer) {
     this.observerList.push(observer);
 };
 
-ObserverList.prototype.unsuscribe = function (observer) {
+ObserverList.prototype.unsubscribe = function (observer) {
     var i = 0;
+
     while( i < this.observerList.length ){
         if( this.observerList[i] === observer ){
             this.observerList.slice(i,1);
@@ -80,9 +81,11 @@ inheritPrototype(Movie, ObserverList);
 Movie.prototype.get = function (key) {
     return this[key];
 };
+
 Movie.prototype.play = function () {
     this.publish('play');
 };
+
 Movie.prototype.set = function(key, value) {
     this[key] = value;
 };
@@ -99,7 +102,8 @@ var harryPotter = new Movie('harry potter', 'ficcion', 5);
 var movieObs1 = new MovieObserver('play');
 var movieObs2 = new MovieObserver('stop');
 
-superman.suscribe(movieObs1);
-harryPotter.suscribe(movieObs2);
+console.log(superman);
+superman.subscribe(movieObs1);
+//harryPotter.subscribe(movieObs2);
 
 
