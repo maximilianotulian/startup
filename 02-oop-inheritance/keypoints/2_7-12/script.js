@@ -69,7 +69,7 @@ ObserverList.prototype.unsubscribe = function (observer) {
 //Exercise 7
 var Movie = ( function () {
 
-    function Movie(title, genre, rating) {
+    function Movie (title, genre, rating) {
 
         ObserverList.call(this);
 

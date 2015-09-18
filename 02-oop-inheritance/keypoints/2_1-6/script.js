@@ -8,7 +8,6 @@
  * 5- Publish "stopped" event on Movie.stop()
  * 6- Log to console when each event is fired
  * */
-
 var inheritPrototype = function (childClass, parentClass){
 
     var copyOfParent = Object.create(parentClass.prototype);
