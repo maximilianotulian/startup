@@ -11,6 +11,31 @@ var inheritPrototype = function (childClass, parentClass){
     childClass.prototype = copyOfParent;
 };
 
+function augment( receivingClass, givingClass ) {
+
+    // only provide certain methods
+    // the index starts at two because the first and second arguments are receivingClass and givingClass
+    if ( arguments[2] ) {
+        for ( var i = 2, len = arguments.length; i < len; i++ ) {
+            receivingClass.prototype[arguments[i]] = givingClass.prototype[arguments[i]];
+        }
+    }
+    // provide all methods
+    else {
+        for ( var methodName in givingClass.prototype ) {
+            // check to make sure the receiving class doesn't have a method of the same name as the one currently
+            // being processed
+            if ( !Object.hasOwnProperty.call(receivingClass.prototype, methodName) ) {
+                receivingClass.prototype[methodName] = givingClass.prototype[methodName];
+            }
+            // Alternatively (check prototype chain as well):
+            // if ( !receivingClass.prototype[methodName] ) {
+            // receivingClass.prototype[methodName] = givingClass.prototype[methodName];
+            // }
+        }
+    }
+};
+
 //MovieObserver can listen one or more actions like play or stop
 var MovieObserver = function (listenTo) {
     this.listenTo = listenTo || [] ;
@@ -69,13 +94,14 @@ ObserverList.prototype.unsubscribe = function (observer) {
 //Exercise 7
 var Movie = ( function () {
 
-    function Movie (title, genre, rating) {
+    function Movie (title, genre, rating, actors) {
 
         ObserverList.call(this);
 
         this.title = title || '';
         this.rating = rating || 0;
         this.genre = genre || '';
+        this.actors = actors || [];
 
         console.log('A movie called ' + title + ' was created');
     };
@@ -98,6 +124,18 @@ var Movie = ( function () {
         this.publish('stop');
     };
 
+    Movie.prototype.showActors = function () {
+        var actorIndex = 0;
+
+        for (actorIndex; actorIndex < this.actors.length ; actorIndex++) {
+            console.log('Name: ' + this.actors[actorIndex].name + ' Sexo: ' + this.actors[actorIndex].sexo + ' Alias: ' + this.actors[actorIndex].alias );
+        }
+    };
+
+    Movie.prototype.addActor = function (actor) {
+        this.actors.push(actor);
+    };
+
     return Movie;
 
 })();
@@ -118,14 +156,24 @@ var Social = function () {
 
 };
 
-
 Social.prototype.share = function (friendName) {
-
+    console.log('Sharing ' + this.title + ' with ' + friendName);
 };
 
 Social.prototype.like = function () {
-
+    console.log('I like it');
 };
+
+//Exercise 10
+augment(Movie, Social, 'share');
+
+//Exercise 11
+var Actor = function (name, sexo, alias) {
+    this.name = name || '';
+    this.sexo = sexo || '';
+    this.alias = alias || '';
+};
+
 
 //Movies to play in the console
 var superman = new Movie('superman', 'drama', 4);
@@ -142,9 +190,20 @@ superman.subscribe(movieObs1);
 harryPotter.subscribe(movieObs2);
 ironMan.subscribe(movieObs3);
 
+//Create actors and add to the Movie
+var danielRadcliffe = new Actor('Daniel Radcliffe', 'Masculine', 'Harry Potter');
+var emmaWatson = new Actor('Emma Watson' , 'Female' , 'Hermione Granger');
+var ruperGrint = new Actor('Ruper Grint' , 'Masculine' , 'Ronald Weasley');
+
+harryPotter.addActor(danielRadcliffe, emmaWatson, ruperGrint);
+harryPotter.addActor(emmaWatson);
+harryPotter.addActor(ruperGrint);
+
 //Play with the console :)
 superman.play();
 superman.stop();
 harryPotter.play();
 harryPotter.stop();
 ironMan.download();
+harryPotter.share('Max');
+harryPotter.showActors();
