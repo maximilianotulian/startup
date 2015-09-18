@@ -195,7 +195,7 @@ var danielRadcliffe = new Actor('Daniel Radcliffe', 'Masculine', 'Harry Potter')
 var emmaWatson = new Actor('Emma Watson' , 'Female' , 'Hermione Granger');
 var ruperGrint = new Actor('Ruper Grint' , 'Masculine' , 'Ronald Weasley');
 
-harryPotter.addActor(danielRadcliffe, emmaWatson, ruperGrint);
+harryPotter.addActor(danielRadcliffe);
 harryPotter.addActor(emmaWatson);
 harryPotter.addActor(ruperGrint);
 
