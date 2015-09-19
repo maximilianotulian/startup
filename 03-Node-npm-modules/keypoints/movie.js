@@ -19,4 +19,4 @@ Movie.prototype.set = function(key, value) {
     this[key] = value;
 };
 
-exports.movie = Movie;
+module.exports = Movie;
