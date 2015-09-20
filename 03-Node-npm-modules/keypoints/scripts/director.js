@@ -1,7 +1,6 @@
 /**
  * Created by MaximilianoDaniel on 18/09/2015.
  */
-
 var Director = function (name, quotes) {
 
     this.name = name || '';
@@ -13,10 +12,9 @@ Director.prototype.speak = function () {
     var message = this.name + ' says : ';
 
     for (var quoteIndex = 0 ; quoteIndex < this.quotes.length ; quoteIndex++){
-        message += this.quotes[quoteIndex];
-        message += ' ';
+        message += this.quotes[quoteIndex] + ' ';
     }
-    console.log(message);
+    return message;
 };
 
 Director.prototype.get = function (key) {

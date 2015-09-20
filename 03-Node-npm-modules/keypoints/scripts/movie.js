@@ -1,9 +1,7 @@
 /**
  * Created by MaximilianoDaniel on 18/09/2015.
  */
-
 var Director = require('./director');
-
 var Movie = function (title, genre, rating, director ) {
 
     this.genre = genre || '' ;
