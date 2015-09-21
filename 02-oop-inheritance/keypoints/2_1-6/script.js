@@ -8,8 +8,7 @@
  * 5- Publish "stopped" event on Movie.stop()
  * 6- Log to console when each event is fired
  * */
-var inheritPrototype = function (childClass, parentClass){
-
+var inheritPrototype = function (childClass, parentClass) {
     var copyOfParent = Object.create(parentClass.prototype);
 
     //Is necessary to point to the childClass constructor
@@ -38,8 +37,10 @@ var ObserverList = function () {
 ObserverList.prototype.publish = function (action) {
     var observerIndex = 0;
 
-    for (observerIndex ; observerIndex < this.observerList.length ; observerIndex++) {
-        for (var listenToIndex = 0 ; listenToIndex < this.observerList[observerIndex].listenTo.length ; listenToIndex++) {
+    for (observerIndex; observerIndex < this.observerList.length; observerIndex += 1) {
+        var listenToIndex = 0;
+
+        for (listenToIndex = 0; listenToIndex < this.observerList[observerIndex].listenTo.length; listenToIndex += 1) {
             if (this.observerList[observerIndex].listenTo[listenToIndex] === action) {
                     if (action === 'play') {
                         this.observerList[observerIndex].play(this);
@@ -60,16 +61,14 @@ ObserverList.prototype.unsubscribe = function (observer) {
 
     for (observerIndex ; observerIndex < this.observerList.length ; observerIndex++) {
         if (this.observerList[observerIndex] === observer) {
-            this.observerList.slice(observerIndex, 1);
+            this.observerList.splice(observerIndex, 1);
             break;
         }
     }
 };
 
-
 //Constructor and prototype pattern
-var Movie = function (title, genre, rating ) {
-
+var Movie = function (title, genre, rating) {
     ObserverList.call(this);
 
     this.genre = genre || '' ;

@@ -2,8 +2,7 @@
  * Created by MaximilianoDaniel on 17/09/2015.
  */
 
-var inheritPrototype = function (childClass, parentClass){
-
+var inheritPrototype = function (childClass, parentClass) {
     var copyOfParent = Object.create(parentClass.prototype);
 
     //Is necessary to point to the childClass constructor
@@ -11,18 +10,19 @@ var inheritPrototype = function (childClass, parentClass){
     childClass.prototype = copyOfParent;
 };
 
-function augment( receivingClass, givingClass ) {
-
+var augment = function (receivingClass, givingClass) {
     // only provide certain methods
     // the index starts at two because the first and second arguments are receivingClass and givingClass
-    if ( arguments[2] ) {
-        for ( var i = 2, len = arguments.length; i < len; i++ ) {
-            receivingClass.prototype[arguments[i]] = givingClass.prototype[arguments[i]];
+    if (arguments[2]) {
+        var methodStartingIndex = 2;
+
+        for (methodStartingIndex; methodStartingIndex < arguments.length; methodStartingIndex += 1 ) {
+            receivingClass.prototype[arguments[methodStartingIndex]] = givingClass.prototype[arguments[methodStartingIndex]];
         }
     }
     // provide all methods
     else {
-        for ( var methodName in givingClass.prototype ) {
+        for (var methodName in givingClass.prototype) {
             // check to make sure the receiving class doesn't have a method of the same name as the one currently
             // being processed
             if ( !Object.hasOwnProperty.call(receivingClass.prototype, methodName) ) {
@@ -61,8 +61,10 @@ var ObserverList = function () {
 ObserverList.prototype.publish = function (action) {
     var observerIndex = 0;
 
-    for (observerIndex ; observerIndex < this.observerList.length ; observerIndex++) {
-        for (var listenToIndex = 0 ; listenToIndex < this.observerList[observerIndex].listenTo.length ; listenToIndex++) {
+    for (observerIndex ; observerIndex < this.observerList.length ; observerIndex += 1) {
+        var listenToIndex = 0;
+
+        for (listenToIndex; listenToIndex < this.observerList[observerIndex].listenTo.length; listenToIndex += 1) {
             if (this.observerList[observerIndex].listenTo[listenToIndex] === action) {
                 if (action === 'play') {
                     this.observerList[observerIndex].play(this);
@@ -83,9 +85,9 @@ ObserverList.prototype.subscribe = function (observer) {
 ObserverList.prototype.unsubscribe = function (observer) {
     var observerIndex = 0;
 
-    for (observerIndex ; observerIndex < this.observerList.length ; observerIndex++) {
+    for (observerIndex; observerIndex < this.observerList.length; observerIndex++) {
         if (this.observerList[observerIndex] === observer) {
-            this.observerList.slice(observerIndex, 1);
+            this.observerList.splice(observerIndex, 1);
             break;
         }
     }
@@ -95,7 +97,6 @@ ObserverList.prototype.unsubscribe = function (observer) {
 var Movie = ( function () {
 
     function Movie (title, genre, rating, actors) {
-
         ObserverList.call(this);
 
         this.title = title || '';
@@ -127,7 +128,7 @@ var Movie = ( function () {
     Movie.prototype.showActors = function () {
         var actorIndex = 0;
 
-        for (actorIndex; actorIndex < this.actors.length ; actorIndex++) {
+        for (actorIndex; actorIndex < this.actors.length; actorIndex += 1) {
             console.log('Name: ' + this.actors[actorIndex].name + ' Sexo: ' + this.actors[actorIndex].sexo + ' Alias: ' + this.actors[actorIndex].alias );
         }
     };
@@ -173,7 +174,6 @@ var Actor = function (name, sexo, alias) {
     this.sexo = sexo || '';
     this.alias = alias || '';
 };
-
 
 //Movies to play in the console
 var superman = new Movie('superman', 'drama', 4);
