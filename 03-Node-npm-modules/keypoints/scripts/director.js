@@ -11,9 +11,10 @@ var Director = function (name, quotes) {
 Director.prototype.speak = function () {
     var message = this.name + ' says : ';
 
-    for (var quoteIndex = 0 ; quoteIndex < this.quotes.length ; quoteIndex++){
+    for (var quoteIndex = 0 ; quoteIndex < this.quotes.length ; quoteIndex++) {
         message += this.quotes[quoteIndex] + ' ';
     }
+
     return message;
 };
 
