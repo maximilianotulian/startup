@@ -1,0 +1,22 @@
+html{
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14px;
+}
+
+.header{
+    background-color: aquamarine;
+    text-align: center;
+}
+
+.aside{
+    background-color: blue;
+}
+
+.nav{
+    background-color: yellow;
+}
+
+.footer{
+    background-color: chartreuse;
+    text-align: center;
+}

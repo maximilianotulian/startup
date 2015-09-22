@@ -1,0 +1,15 @@
+6
+How could you add weight to the global font definition to win over the classes added by point 3?
+adding more weight to html selector
+html .header,
+html .footer,
+html .sidebear,
+html .content,
+html .navigation{
+    font-size:14px;
+    }
+
+7
+.oh-no-inline-styles{
+background-color: green !important;
+}
