@@ -1,0 +1,11 @@
+<h3> My movies </h3>
+<ul>
+    <li ng-repeat="movie in movies">
+        <p>Title: {{ movie.title }} </p>
+        <a href="" ng-click="toggle = !toggle">Show more</a>
+        <div ng-show="toggle">
+            <p>Genre: {{ movie.genre }} </p>
+            <p>Rating: {{ movie.rating }} </p>
+        </div>
+    </li>
+</ul>

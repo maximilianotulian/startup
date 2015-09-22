@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Maximiliano Tulian" />
+    <meta name="description" content="Exercise 5_*" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MVC - AngularJS</title>
+    <link rel="stylesheet" href="css/normalize.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body class="bg-success" ng-app="MovieApp">
+        <header>
+            <h1 class="text-center">Welcome to angular</h1>
+        </header>
+
+        <div class="container" ng-class="row">
+            <div class="col-md-2">
+
+            </div>
+            <!-- scope: MovieListCtrl -->
+            <section ng-controller="MovieListCtrl" class="col-md-5">
+                <movie-details></movie-details>
+            </section>
+            <!-- scope: MovieAbmCtrl -->
+            <section ng-controller="MovieAbmCtrl" class="col-md-5">
+
+            </section>
+            <!-- /scope: MovieAbmCtrl -->
+    </div>
+
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/api.js"></script>
+</body>
+</html>
