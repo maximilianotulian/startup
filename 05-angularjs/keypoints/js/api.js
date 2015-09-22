@@ -13,7 +13,7 @@ MovieApp.service('Movies', function () {
         if (window.localStorage['movies']) {
             movies = JSON.parse(window.localStorage['movies']);
         } else {
-            this.movies = [{
+            movies = [{
                 "title": "Harry Potter and the philosopher's stone",
                 "genre": "ficcion",
                 "rating": 5
@@ -36,7 +36,7 @@ MovieApp.service('Movies', function () {
     };
 });
 
-MovieApp.directive('movieDetails', function (){
+MovieApp.directive('movieDetails', function () {
     return {
         templateUrl: 'template/movieDetails.html'
     };
