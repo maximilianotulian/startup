@@ -9,9 +9,9 @@ MovieApp.controller('MovieListCtrl', ['$scope', 'Movies', function ($scope, Movi
 
 MovieApp.service('Movies', function () {
     this.get = function () {
-        var movies = {};
+        var movies = [];
         if (window.localStorage['movies']) {
-            this.movies = JSON.parse(window.localStorage['movies']);
+            movies = JSON.parse(window.localStorage['movies']);
         } else {
             this.movies = [{
                 "title": "Harry Potter and the philosopher's stone",
@@ -32,7 +32,7 @@ MovieApp.service('Movies', function () {
             }];
             window.localStorage['movies'] = JSON.stringify(movies);
         }
-        return this.movies;
+        return movies;
     };
 });
 
@@ -42,6 +42,6 @@ MovieApp.directive('movieDetails', function (){
     };
 });
 
-MovieApp.directive('MovieAbmCtrl', ['$scope', function ($scope) {
+MovieApp.controller('MovieAbmCtrl', ['$scope', function ($scope) {
 
 }]);
