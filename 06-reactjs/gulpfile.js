@@ -1,7 +1,6 @@
 var browserify = require('browserify');
 var browserSync = require('browser-sync');
 var concat = require('gulp-concat');
-var del = require('del');
 var gulp = require('gulp');
 var handlebars = require('gulp-compile-handlebars');
 var reactify = require('reactify');
@@ -19,7 +18,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('js', function () {
-    var bundle = browserify('index.js').transform(reactify).bundle().on('error', function () {
+    var bundle = browserify('./index.js').transform(reactify).bundle().on('error', function (error) {
         console.log(error);
         this.emit('end');
     });
