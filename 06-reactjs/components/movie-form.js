@@ -1,4 +1,8 @@
 var React = require('react');
+var Input = require('./input');
+var Button = require('./button');
+var _ = require('lodash');
+
 
 var MovieForm = React.createClass({
 
@@ -6,33 +10,64 @@ var MovieForm = React.createClass({
         onMovieSubmit: React.PropTypes.func
     },
 
+    getInitialState: function () {
+        return {
+            title: '',
+            genre: '',
+            rating: '',
+        };
+    },
+
     render: function () {
         return (
             <form {...this.getFormProps()}>
-                <input type="text" placeholder="Title" ref="title"/>
-                <input type="text" placeholder="Genre" ref="genre"/>
-                <input type="number" placeholder="Rating" ref="rating"/>
+                {this.renderInputs()}
                 <input type="submit" value="Post" />
             </form>
         );
     },
 
-    getFormProps: function () {
-      return {
-          className: 'movie-form',
-          onSubmit: this.handleSubmit
-      };
+    renderInputs: function () {
+        var inputs = [];
+        _.each(this.state, function (value, key) {
+            inputs.push(<Input {...this.getInputProps(value, key)} />);
+        }.bind(this));
+        return inputs;
     },
 
-    /**
+    getFormProps: function () {
+        return {
+            className: 'movie-form',
+            onSubmit: this.handleSubmit
+        };
+    },
+
+    getInputProps: function (value, key) {
+        return {
+            key: key,
+            index: key,
+            value: value,
+            onChange: this.handleInputChange
+        };
+    },
+
+    handleInputChange: function (event, index) {
+        var newState = {};
+
+        newState[index] = event.target.value;
+        this.setState(newState);
+    },
+
+     /**
      * Clean the form fields when the form is submitted with valid input
      * @param event
      */
     handleSubmit: function (event) {
+        var title = this.state.title;
+        var genre = this.state.genre;
+        var rating = this.state.rating;
+
         event.preventDefault();
-        var title = React.findDOMNode(this.refs.title).value.trim();
-        var genre = React.findDOMNode(this.refs.genre).value.trim();
-        var rating = React.findDOMNode(this.refs.rating).value.trim();
 
         if (!title || !genre || !rating) {
             return;
@@ -42,11 +77,12 @@ var MovieForm = React.createClass({
     },
 
     cleanFormFields: function () {
-        React.findDOMNode(this.refs.title).value = '';
-        React.findDOMNode(this.refs.genre).value = '';
-        React.findDOMNode(this.refs.rating).value = '';
+        this.setState({
+            title: '',
+            genre: '',
+            rating: ''
+        });
     }
-
 });
 
 module.exports = MovieForm;
