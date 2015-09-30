@@ -29,6 +29,7 @@ var MovieForm = React.createClass({
 
     renderInputs: function () {
         var inputs = [];
+
         _.each(this.state, function (value, key) {
             inputs.push(<Input {...this.getInputProps(value, key)} />);
         }.bind(this));
@@ -70,19 +71,16 @@ var MovieForm = React.createClass({
 
         event.preventDefault();
 
-        if (!title || !genre || !rating) {
-            return;
+        if (title && genre && rating) {
+            this.props.onMovieSubmit({title: title, genre: genre, rating: rating});
+            this.cleanFormFields();
         }
-        this.props.onMovieSubmit({title: title, genre: genre, rating: rating});
-        this.cleanFormFields();
     },
 
     cleanFormFields: function () {
-        this.setState({
-            title: '',
-            genre: '',
-            rating: ''
-        });
+        var initialState = this.getInitialState();
+
+        this.setState(initialState);
     }
 });
 
