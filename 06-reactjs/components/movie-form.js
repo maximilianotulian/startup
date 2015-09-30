@@ -3,7 +3,6 @@ var Input = require('./input');
 var Button = require('./button');
 var _ = require('lodash');
 
-
 var MovieForm = React.createClass({
 
     propTypes: {
