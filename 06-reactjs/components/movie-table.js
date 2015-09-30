@@ -4,15 +4,16 @@ var MovieRow = require('./movie-row');
 var MovieTable = React.createClass({
 
     propTypes: {
-        data: React.PropTypes.array.isRequired
+        data: React.PropTypes.array.isRequired,
+        onButtonClick: React.PropTypes.func.isRequired
     },
 
     render: function () {
         var rows = [];
 
         this.props.data.forEach (function (movie) {
-            rows.push(<MovieRow movie={movie} key={movie.title} />);
-        });
+            rows.push(<MovieRow movie={movie} key={movie.title} onButtonClick={this.handleButtonClick}/>);
+        }.bind(this));
 
         return (
             <table className="col-md-6 table">
@@ -21,11 +22,19 @@ var MovieTable = React.createClass({
                     <th>Title</th>
                     <th>Genre</th>
                     <th>Rating</th>
+                    <th>Delete</th>
+                    <th>Edit</th>
                 </tr>
                 </thead>
-                <tbody>{rows}</tbody>
+                <tbody>
+                    {rows}
+                </tbody>
             </table>
         );
+    },
+
+    handleButtonClick: function (movie, action) {
+        this.props.onButtonClick(movie, action)
     }
 
 });

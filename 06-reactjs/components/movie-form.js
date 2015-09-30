@@ -14,7 +14,7 @@ var MovieForm = React.createClass({
         return {
             title: '',
             genre: '',
-            rating: '',
+            rating: ''
         };
     },
 
@@ -22,7 +22,7 @@ var MovieForm = React.createClass({
         return (
             <form {...this.getFormProps()}>
                 {this.renderInputs()}
-                <input type="submit" value="Post" />
+                <input type="submit" value="Add"/>
             </form>
         );
     },
@@ -44,10 +44,10 @@ var MovieForm = React.createClass({
 
     getInputProps: function (value, key) {
         return {
-            key: key,
             index: key,
-            value: value,
-            onChange: this.handleInputChange
+            key: key,
+            onChange: this.handleInputChange,
+            value: value
         };
     },
 
