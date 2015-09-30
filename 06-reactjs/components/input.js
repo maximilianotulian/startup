@@ -1,22 +1,21 @@
 var React = require('react');
 var _ = require('lodash');
 
-
 var Input = React.createClass({
 
     propTypes: {
-        defaultValue: React.PropTypes.string,
+        defaultValue: React.PropTypes.string.isRequired,
+        index: React.PropTypes.string,
         onChange: React.PropTypes.func,
-        value: React.PropTypes.string,
-        index: React.PropTypes.string
+        value: React.PropTypes.string
     },
 
     getInitialState: function () {
         var initialState = {};
 
-        if ((_.isUndefined(this.props.value))) {
+        if (_.isUndefined(this.props.value)) {
             initialState.value = this.props.defaultValue;
-        };
+        }
 
         return initialState;
     },
@@ -34,7 +33,6 @@ var Input = React.createClass({
     handleChange: function (event) {
         this.props.onChange(event, this.props.index);
     }
-
 });
 
 module.exports = Input;

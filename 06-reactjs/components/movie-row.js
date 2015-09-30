@@ -42,7 +42,6 @@ var MovieRow = React.createClass({
     handleEditClick: function () {
         this.props.onButtonClick(this.props.movie, 'edit');
     }
-
 });
 
 module.exports = MovieRow;

@@ -44,9 +44,10 @@ var MovieForm = React.createClass({
 
     getInputProps: function (value, key) {
         return {
+            defaultValue: '',
             index: key,
-            key: key,
             onChange: this.handleInputChange,
+            key: key,
             value: value
         };
     },

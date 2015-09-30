@@ -36,7 +36,6 @@ var MovieTable = React.createClass({
     handleButtonClick: function (movie, action) {
         this.props.onButtonClick(movie, action)
     }
-
 });
 
 module.exports = MovieTable;

@@ -70,7 +70,6 @@ var MovieStore = React.createClass({
             }
         }
     }
-
 });
 
 module.exports = MovieStore;
