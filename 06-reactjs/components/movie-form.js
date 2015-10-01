@@ -20,35 +20,26 @@ var MovieForm = React.createClass({
     render: function () {
         return (
             <form {...this.getFormProps()}>
-                {this.renderInputs()}
+                <Input {...this.getInputProps('title')} />
+                <Input {...this.getInputProps('genre')} />
+                <Input {...this.getInputProps('rating')} />
                 <input type="submit" value="Add"/>
             </form>
         );
     },
 
-    renderInputs: function () {
-        var inputs = [];
-
-        _.each(this.state, function (value, key) {
-            inputs.push(<Input {...this.getInputProps(value, key)} />);
-        }.bind(this));
-        return inputs;
+    getInputProps: function (attr) {
+        return {
+            index: attr,
+            onChange: this.handleInputChange,
+            value: this.state[attr]
+        };
     },
 
     getFormProps: function () {
         return {
             className: 'movie-form',
             onSubmit: this.handleSubmit
-        };
-    },
-
-    getInputProps: function (value, key) {
-        return {
-            defaultValue: '',
-            index: key,
-            onChange: this.handleInputChange,
-            key: key,
-            value: value
         };
     },
 
