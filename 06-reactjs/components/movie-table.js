@@ -1,18 +1,16 @@
 var React = require('react');
 var MovieRow = require('./movie-row');
-
+var MovieStore = require('../store/movieStore');
 var MovieTable = React.createClass({
 
     propTypes: {
-        data: React.PropTypes.array.isRequired,
-        onButtonClick: React.PropTypes.func.isRequired
+        movies: React.PropTypes.array.isRequired
     },
 
     render: function () {
         var rows = [];
-
-        this.props.data.forEach (function (movie) {
-            rows.push(<MovieRow movie={movie} key={movie.title} onButtonClick={this.handleButtonClick}/>);
+        this.props.movies.forEach (function (movie, index) {
+            rows.push(<MovieRow key={movie.title} index={index} onButtonClick={this.handleButtonClick}/>);
         }.bind(this));
 
         return (
@@ -33,8 +31,12 @@ var MovieTable = React.createClass({
         );
     },
 
-    handleButtonClick: function (movie, action) {
-        this.props.onButtonClick(movie, action)
+    handleButtonClick: function (action, index) {
+        if (action ==='delete') {
+            MovieStore.removeMovie(index);
+        } else if (action === 'edit') {
+            MovieStore.setSelected(index);
+        }
     }
 });
 

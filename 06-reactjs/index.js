@@ -1,4 +1,5 @@
 var React = require('react');
-var MovieStore = require('./components/movie-store');
+var MovieStore = require('./old/movie-store');
+var MainView = require('./views/main-view');
 
-React.render(<MovieStore />, document.getElementById('mount'));
+React.render(<MainView />, document.getElementById('mount'));

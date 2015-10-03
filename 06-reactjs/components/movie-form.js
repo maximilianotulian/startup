@@ -2,19 +2,20 @@ var React = require('react');
 var Input = require('./input');
 var Button = require('./button');
 var _ = require('lodash');
+var MovieStore = require('../store/movieStore');
+var MovieConstants = require('../store/movieConstants');
 
 var MovieForm = React.createClass({
 
     propTypes: {
-        onMovieSubmit: React.PropTypes.func
+        selected: React.PropTypes.oneOfType([
+            React.PropTypes.string.isRequired,
+            React.PropTypes.number.isRequired
+        ])
     },
 
     getInitialState: function () {
-        return {
-            title: '',
-            genre: '',
-            rating: ''
-        };
+        return this.getState();
     },
 
     render: function () {
@@ -43,6 +44,24 @@ var MovieForm = React.createClass({
         };
     },
 
+    getState: function () {
+        var title = '';
+        var genre= '';
+        var rating= '';
+        if (this.props.index !== null) {
+            console.log('index distinto de null');
+            var movie = MovieStore.getMovieAt(this.props.index);
+            title = movie.title;
+            genre = movie.genre;
+            rating = movie.rating
+        }
+        return {
+            title: title,
+            genre: genre,
+            rating: rating
+        }
+    },
+
     handleInputChange: function (event, index) {
         var newState = {};
 
@@ -58,19 +77,25 @@ var MovieForm = React.createClass({
         var title = this.state.title;
         var genre = this.state.genre;
         var rating = this.state.rating;
-
         event.preventDefault();
 
         if (title && genre && rating) {
-            this.props.onMovieSubmit({title: title, genre: genre, rating: rating});
+            var movie = {title: title, genre: genre, rating: rating};
+            console.log(MovieStore.getMovies());
+
+            if (this.props.index === null) {
+                MovieStore.addMovie(movie);
+            } else {
+                console.log('update');
+                MovieStore.updateMovie(this.props.index, movie);
+                MovieStore.setSelected(null);
+            }
             this.cleanFormFields();
         }
     },
 
     cleanFormFields: function () {
-        var initialState = this.getInitialState();
-
-        this.setState(initialState);
+        this.setState(this.getInitialState());
     }
 });
 

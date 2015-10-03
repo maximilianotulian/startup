@@ -1,19 +1,18 @@
 var React = require('react');
 var _ = require('lodash');
-
+var MovieStore = require('../store/movieStore');
 var MovieRow = React.createClass({
 
     propTypes: {
-       movie: React.PropTypes.shape({
-            genre: React.PropTypes.string.isRequired,
-            rating: React.PropTypes.string.isRequired,
-            title: React.PropTypes.string.isRequired
-       }),
-       onButtonClick: React.PropTypes.func.isRequired
+        onButtonClick: React.PropTypes.func.isRequired,
+        index: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.number
+        ])
     },
 
     render: function () {
-        var movie = this.props.movie;
+        var movie = MovieStore.getMovieAt(this.props.index);
         return (
             <tr className="movie-row">
                 <td>
@@ -36,11 +35,11 @@ var MovieRow = React.createClass({
     },
 
     handleDeleteClick: function () {
-        this.props.onButtonClick(this.props.movie, 'delete');
+        this.props.onButtonClick('delete', this.props.index);
     },
 
     handleEditClick: function () {
-        this.props.onButtonClick(this.props.movie, 'edit');
+        this.props.onButtonClick('edit', this.props.index);
     }
 });
 

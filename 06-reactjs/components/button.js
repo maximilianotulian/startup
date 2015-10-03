@@ -8,11 +8,9 @@ var Button = React.createClass({
 
     render: function () {
         return (
-            <button type="button">
-
-            </button>
+            <button type="button"></button>
         );
     }
 });
 
-module.import = Button;
+module.exports = Button;
