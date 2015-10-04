@@ -1,6 +1,7 @@
 var React = require('react');
 var _ = require('lodash');
 var MovieStore = require('../store/movieStore');
+var Link = require('react-router').Link;
 var MovieRow = React.createClass({
 
     propTypes: {
@@ -28,7 +29,7 @@ var MovieRow = React.createClass({
                     <button type="button" onClick={this.handleDeleteClick}> Delete </button>
                 </td>
                 <td>
-                    <button type="button" onClick={this.handleEditClick}> Edit </button>
+                    <Link to="edit" params={{genre: movie.genre, rating: movie.rating, title: movie.title}}> Edit </Link>
                 </td>
             </tr>
         );
@@ -41,6 +42,7 @@ var MovieRow = React.createClass({
     handleEditClick: function () {
         this.props.onButtonClick('edit', this.props.index);
     }
+
 });
 
 module.exports = MovieRow;

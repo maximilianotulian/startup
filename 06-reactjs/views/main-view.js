@@ -1,8 +1,9 @@
 var React = require('react');
 var MovieStore = require('../store/movieStore');
 var MovieConstants = require('../store/movieConstants');
-var MovieTable = require('../components/movie-table');
-var MovieForm = require('../components/movie-form');
+var MovieTableView = require('../views/movie-table-view');
+var Router = require('react-router');
+var RouteHandler = Router.RouteHandler;
 
 var MainView = React.createClass({
 
@@ -30,8 +31,8 @@ var MainView = React.createClass({
                     <h1>Welcome to the amazing world of react</h1>
                 </section>
                 <div className="row">
-                    <MovieTable movies={this.state.movies} />
-                    <MovieForm  index={this.state.selected}/>
+                    <MovieTableView movies={this.state.movies} />
+                    <RouteHandler />
                 </div>
             </div>
         )

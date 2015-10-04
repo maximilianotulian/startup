@@ -46,7 +46,8 @@ gulp.task('browser-sync', function () {
     gulp.watch([
         'components/**/*.js',
         'libs/**/*.js',
-        'views/**/*.js'
+        'views/**/*.js',
+        'router.js'
     ], ['js', browserSync.reload]);
     gulp.watch([
         'html/**/*.html'
