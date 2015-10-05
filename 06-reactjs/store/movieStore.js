@@ -27,15 +27,11 @@ MovieStore.prototype.getInitialState = function () {
         'title': 'Harry Potter and the chamber of secrets',
             'genre': 'drama',
             'rating': '2'
-        }],
-        selected: null
+        }]
     };
 };
 MovieStore.prototype.getMovie = function (index) {
     return this.state.movies[index];
-};
-MovieStore.prototype.getSelected = function () {
-    return this.state.selected;
 };
 MovieStore.prototype.getMovies = function () {
     return this.state.movies;
@@ -55,9 +51,6 @@ MovieStore.prototype.removeMovie = function (index) {
     newMovies.splice(index, 1);
     this.setState({movies: newMovies});
 };
-MovieStore.prototype.setSelected = function (index) {
-    this.setState({selected: index});
-};
 MovieStore.prototype.setState = function (newState, callback) {
     _.extend(this.state, newState);
 
@@ -66,10 +59,10 @@ MovieStore.prototype.setState = function (newState, callback) {
         callback();
     }
 };
-MovieStore.prototype.addChangeListener = function (action, callback) {
+MovieStore.prototype.addEventListener = function (action, callback) {
     this.on(action, callback);
 };
-MovieStore.prototype.removeChangeListener = function (action, callback) {
+MovieStore.prototype.removeEventListener = function (action, callback) {
     this.removeListener(action, callback);
 };
 

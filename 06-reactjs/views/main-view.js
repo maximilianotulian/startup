@@ -23,12 +23,12 @@ var MainView = React.createClass({
 
     //Listen for changes
     componentDidMount: function () {
-        MovieStore.addChangeListener(MovieConstants.CHANGE_EVENT, this.updateMovies);
+        MovieStore.addEventListener(MovieConstants.CHANGE_EVENT, this.updateMovies);
     },
 
     //Unbind change listener
     componentWillUnmount: function () {
-        MovieStore.removeChangeListener(MovieConstants.CHANGE_EVENT, this.updateMovies);
+        MovieStore.removeEventListener(MovieConstants.CHANGE_EVENT, this.updateMovies);
     },
 
     render: function () {

@@ -18,33 +18,8 @@ var MovieCreationView = React.createClass({
         return this.getStateFromStore();
     },
 
-    getStateFromStore(props) {
-        var data = props ? props.params : this.props.params;
-        var movie = MovieStore.getMovie(data.index) || '';
-
-        return {
-            title: movie.title || '',
-            genre: movie.genre || '',
-            rating: movie.rating || ''
-        }
-    },
-
-    componentDidMount: function () {
-        MovieStore.addChangeListener(MovieConstants.CHANGE_EVENT, this.updateMovies);
-    },
-
-    componentWillUnmount: function () {
-        MovieStore.addChangeListener(MovieConstants.CHANGE_EVENT, this.updateMovies);
-    },
-
     componentWillReceiveProps: function (nextProps) {
         this.setState(this.getStateFromStore(nextProps));
-    },
-
-    updateMovies: function () {
-        if (this.isMounted())
-            return;
-        this.setState(this.getStateFromStore())
     },
 
     render: function () {
@@ -71,6 +46,17 @@ var MovieCreationView = React.createClass({
             onChange: this.handleInputChange,
             value: this.state[attr] || ''
         };
+    },
+
+    getStateFromStore(props) {
+        var data = props ? props.params : this.props.params;
+        var movie = MovieStore.getMovie(data.index) || {};
+
+        return {
+            title: movie.title || '',
+            genre: movie.genre || '',
+            rating: movie.rating || ''
+        }
     },
 
     getSubmitProps: function () {
@@ -108,12 +94,8 @@ var MovieCreationView = React.createClass({
             } else {
                 MovieStore.updateMovie(index, movie);
             }
-            this.navigateAfterSubmit();
+            this.transitionTo('default');
         }
-    },
-
-    navigateAfterSubmit: function () {
-        this.transitionTo('default');
     }
 });
 

@@ -6,7 +6,7 @@ var Input = React.createClass({
 
     propTypes: {
         index: React.PropTypes.string.isRequired,
-        onChange: React.PropTypes.func.isRequired,
+        onChange: React.PropTypes.func,
         value: React.PropTypes.string
     },
 
