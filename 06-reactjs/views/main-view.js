@@ -16,8 +16,7 @@ var MainView = React.createClass({
 
     getInitialState: function () {
         return{
-            movies: MovieStore.getMovies(),
-            selected: MovieStore.getSelected()
+            movies: MovieStore.getMovies()
         }
     },
 
@@ -48,8 +47,7 @@ var MainView = React.createClass({
     updateMovies: function () {
         this.setState
             ({
-                movies: MovieStore.getMovies(),
-                selected: MovieStore.getSelected()
+                movies: MovieStore.getMovies()
             });
     }
 });
