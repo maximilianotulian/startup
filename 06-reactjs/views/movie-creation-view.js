@@ -1,43 +1,88 @@
+// LIBS
 var React = require('react');
-var Input = require('../components/input');
+var Router = require('react-router');
 var _ = require('lodash');
+
+// STORES
 var MovieStore = require('../store/movieStore');
 var MovieConstants = require('../store/movieConstants');
 
+// COMPONENTS
+var Input = require('../components/input');
+
 var MovieCreationView = React.createClass({
 
+    mixins: [ Router.Navigation ],
+
     getInitialState: function () {
-        return ({
-            genre: this.props.params.genre || '',
-            rating: this.props.params.rating || '',
-            title: this.props.params.title || ''
-        })
+        return this.getStateFromStore();
+    },
+
+    getStateFromStore(props) {
+        var data = props ? props.params : this.props.params;
+        var movie = MovieStore.getMovie(data.index) || '';
+
+        return {
+            title: movie.title || '',
+            genre: movie.genre || '',
+            rating: movie.rating || ''
+        }
+    },
+
+    componentDidMount: function () {
+        MovieStore.addChangeListener(MovieConstants.CHANGE_EVENT, this.updateMovies);
+    },
+
+    componentWillUnmount: function () {
+        MovieStore.addChangeListener(MovieConstants.CHANGE_EVENT, this.updateMovies);
+    },
+
+    componentWillReceiveProps: function (nextProps) {
+        this.setState(this.getStateFromStore(nextProps));
+    },
+
+    updateMovies: function () {
+        if (this.isMounted())
+            return;
+        this.setState(this.getStateFromStore())
     },
 
     render: function () {
-
         return (
             <form {...this.getFormProps()}>
                 <Input {...this.getInputProps('title')} />
                 <Input {...this.getInputProps('genre')} />
                 <Input {...this.getInputProps('rating')} />
-                <input type="submit" value="Add"/>
+                <input {...this.getSubmitProps()}/>
             </form>
         );
-    },
-
-    getInputProps: function (attr) {
-        return {
-            index: attr,
-            onChange: this.handleInputChange,
-            value: this.state[attr]
-        };
     },
 
     getFormProps: function () {
         return {
             className: 'movie-form',
             onSubmit: this.handleSubmit
+        };
+    },
+
+    getInputProps: function (attr) {
+        return {
+            index: attr,
+            onChange: this.handleInputChange,
+            value: this.state[attr] || ''
+        };
+    },
+
+    getSubmitProps: function () {
+        var value = 'add';
+
+        if (!_.isUndefined(this.props.params.index)) {
+            value = 'edit';
+        }
+
+        return {
+            type: 'submit',
+            value: value
         };
     },
 
@@ -48,33 +93,27 @@ var MovieCreationView = React.createClass({
         this.setState(newState);
     },
 
-    /**
-     * Clean the form fields when the form is submitted with valid input
-     * @param event
-     */
     handleSubmit: function (event) {
+        event.preventDefault();
+
         var title = this.state.title;
         var genre = this.state.genre;
         var rating = this.state.rating;
-        event.preventDefault();
+        var movie = {title: title, genre: genre, rating: rating};
+        var index = this.props.params.index;
 
         if (title && genre && rating) {
-
-            var movie = {title: title, genre: genre, rating: rating};
-            var selected = MovieStore.getSelected();
-
-            if (selected === null) {
+            if (_.isUndefined(index)) {
                 MovieStore.addMovie(movie);
             } else {
-                MovieStore.updateMovie(selected, movie);
-                MovieStore.setSelected(null);
+                MovieStore.updateMovie(index, movie);
             }
-            this.cleanFormFields();
+            this.navigateAfterSubmit();
         }
     },
 
-    cleanFormFields: function () {
-        this.setState(this.getInitialState());
+    navigateAfterSubmit: function () {
+        this.transitionTo('default');
     }
 });
 

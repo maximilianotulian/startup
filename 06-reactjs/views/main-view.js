@@ -1,8 +1,15 @@
+// LIBS
 var React = require('react');
+var Router = require('react-router');
+
+// STORES
 var MovieStore = require('../store/movieStore');
 var MovieConstants = require('../store/movieConstants');
+
+// VIEWS
 var MovieTableView = require('../views/movie-table-view');
-var Router = require('react-router');
+
+// COMPONENTS
 var RouteHandler = Router.RouteHandler;
 
 var MainView = React.createClass({
@@ -39,12 +46,11 @@ var MainView = React.createClass({
     },
 
     updateMovies: function () {
-        this.setState(
-            {
+        this.setState
+            ({
                 movies: MovieStore.getMovies(),
                 selected: MovieStore.getSelected()
-            }
-        );
+            });
     }
 });
 

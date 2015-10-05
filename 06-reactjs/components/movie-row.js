@@ -1,7 +1,13 @@
+// LIBS
 var React = require('react');
 var _ = require('lodash');
+
+// STORES
 var MovieStore = require('../store/movieStore');
+
+// COMPONENTS
 var Link = require('react-router').Link;
+
 var MovieRow = React.createClass({
 
     propTypes: {
@@ -13,7 +19,9 @@ var MovieRow = React.createClass({
     },
 
     render: function () {
-        var movie = MovieStore.getMovieAt(this.props.index);
+        var index = this.props.index;
+        var movie = MovieStore.getMovie(index);
+
         return (
             <tr className="movie-row">
                 <td>
@@ -29,7 +37,7 @@ var MovieRow = React.createClass({
                     <button type="button" onClick={this.handleDeleteClick}> Delete </button>
                 </td>
                 <td>
-                    <Link to="edit" params={{genre: movie.genre, rating: movie.rating, title: movie.title}}> Edit </Link>
+                    <Link to={`/edit/${index}`}> Edit </Link>
                 </td>
             </tr>
         );
@@ -37,12 +45,7 @@ var MovieRow = React.createClass({
 
     handleDeleteClick: function () {
         this.props.onButtonClick('delete', this.props.index);
-    },
-
-    handleEditClick: function () {
-        this.props.onButtonClick('edit', this.props.index);
     }
-
 });
 
 module.exports = MovieRow;

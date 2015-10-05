@@ -1,11 +1,12 @@
+//LIBS
 var React = require('react');
 var _ = require('lodash');
 
 var Input = React.createClass({
 
     propTypes: {
-        index: React.PropTypes.string,
-        onChange: React.PropTypes.func,
+        index: React.PropTypes.string.isRequired,
+        onChange: React.PropTypes.func.isRequired,
         value: React.PropTypes.string
     },
 
@@ -21,8 +22,17 @@ var Input = React.createClass({
 
     render: function () {
         return (
-            <input type="text" className="input" value={this.getValue()} onChange={this.handleChange}/>
+            <input {...this.getProps()}/>
         );
+    },
+
+    getProps: function () {
+        return ({
+            type: 'text',
+            className: 'input',
+            value: this.getValue(),
+            onChange: this.handleChange
+        })
     },
 
     getValue: function () {

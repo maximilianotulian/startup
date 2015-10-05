@@ -31,7 +31,7 @@ MovieStore.prototype.getInitialState = function () {
         selected: null
     };
 };
-MovieStore.prototype.getMovieAt = function (index) {
+MovieStore.prototype.getMovie = function (index) {
     return this.state.movies[index];
 };
 MovieStore.prototype.getSelected = function () {
@@ -45,11 +45,13 @@ MovieStore.prototype.addMovie = function (movie) {
 };
 MovieStore.prototype.updateMovie = function (index, movie) {
     var newMovies = this.state.movies;
+
     newMovies[index] = movie;
     this.setState({movies: newMovies})
 };
 MovieStore.prototype.removeMovie = function (index) {
     var newMovies = this.state.movies;
+
     newMovies.splice(index, 1);
     this.setState({movies: newMovies});
 };

@@ -1,6 +1,11 @@
+// LIBS
 var React = require('react');
-var MovieRow = require('../components/movie-row');
+
+// STORES
 var MovieStore = require('../store/movieStore');
+
+// COMPONENTS
+var MovieRow = require('../components/movie-row');
 
 var MovieTableView = React.createClass({
 
@@ -10,8 +15,9 @@ var MovieTableView = React.createClass({
 
     render: function () {
         var rows = [];
+
         this.props.movies.forEach (function (movie, index) {
-            rows.push(<MovieRow key={movie.title} index={index} onButtonClick={this.handleButtonClick}/>);
+            rows.push(<MovieRow {...this.getMovieRowProps(movie, index)}/>);
         }.bind(this));
 
         return (
@@ -32,12 +38,17 @@ var MovieTableView = React.createClass({
         );
     },
 
+    getMovieRowProps: function (movie, index) {
+        return ({
+            index: index,
+            key: movie.title,
+            onButtonClick: this.handleButtonClick
+        })
+    },
+
     handleButtonClick: function (action, index) {
         if (action ==='delete') {
             MovieStore.removeMovie(index);
-        } else if (action === 'edit') {
-            MovieStore.setSelected(index);
-            location.reload();
         }
     }
 });
