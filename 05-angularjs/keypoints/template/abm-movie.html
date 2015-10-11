@@ -1,0 +1,16 @@
+<form>
+    <div class="form-group">
+        <label for="txt-title">Title</label>
+        <input type="text" class="form-control" id="txt-title" ng-model="title">
+    </div>
+    <div class="form-group">
+        <label for="txt-genre">Genre</label>
+        <input type="text" class="form-control" id="txt-genre" ng-model="genre">
+    </div>
+    <div class="form-group">
+        <label for="txt-rating">Rating</label>
+        <input type="text" class="form-control" id="txt-rating" ng-model="rating">
+    </div>
+    </div>
+    <button type="submit" class="btn btn-default" ng-click="saveChanges()">{{ action.toUpperCase(); }}</button>
+</form>

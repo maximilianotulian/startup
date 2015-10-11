@@ -5,9 +5,9 @@ var MovieApp = angular.module('MovieApp', ['ngRoute']);
 
 MovieApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/index/:movieIndex/action/:action', {
-        templateUrl: 'template/abmMovie.html',
+        templateUrl: 'template/abm-movie.html',
         controller: 'MovieAbmCtrl'
-        });
+    });
 }]);
 
 MovieApp.controller('MovieListCtrl', ['$scope', 'Movies', function ($scope, Movies) {
@@ -44,6 +44,7 @@ MovieApp.service('Movies', function ($localStorage) {
         } else {
             this.init();
         }
+
         return this.movies;
     };
     this.push = function (movie) {
@@ -62,19 +63,19 @@ MovieApp.service('Movies', function ($localStorage) {
         return this.movies[index];
     };
     this.clear = function () {
-      $localStorage.clear();
+        $localStorage.clear();
     };
 });
 
-MovieApp.factory('$localStorage', ['$window', function($window) {
+MovieApp.factory('$localStorage', ['$window', function ($window) {
     return {
-        setObject: function(key, value) {
+        setObject: function (key, value) {
             $window.localStorage[key] = JSON.stringify(value);
         },
-        getObject: function(key) {
-            return JSON.parse($window.localStorage[key] || null );
+        getObject: function (key) {
+            return JSON.parse($window.localStorage[key] || null);
         },
-        clear: function() {
+        clear: function () {
             $window.localStorage.clear();
         }
     }
@@ -82,12 +83,12 @@ MovieApp.factory('$localStorage', ['$window', function($window) {
 
 MovieApp.directive('movieDetails', function () {
     return {
-        templateUrl: 'template/movieDetails.html'
+        templateUrl: 'template/movie-details.html'
     };
 });
 
 MovieApp.controller('MovieAbmCtrl', ['$scope', '$routeParams', 'Movies', function ($scope, $routeParams, Movies) {
-
+    var movie;
     this.setMovieScope = function (movie) {
         $scope.title = movie.title;
         $scope.genre = movie.genre;
@@ -98,7 +99,7 @@ MovieApp.controller('MovieAbmCtrl', ['$scope', '$routeParams', 'Movies', functio
     $scope.action = $routeParams.action;
     $scope.saveChanges = function () {
         if ($scope.action == 'add') {
-            var movie = {
+            movie = {
 
                 title: $scope.title,
                 genre: $scope.genre,
@@ -108,14 +109,14 @@ MovieApp.controller('MovieAbmCtrl', ['$scope', '$routeParams', 'Movies', functio
         } else if ($scope.action == 'delete') {
             Movies.delete($scope.movieIndex);
         } else if ($scope.action == 'edit') {
-            var movie = {
+            movie = {
 
                 title: $scope.title,
                 genre: $scope.genre,
                 rating: $scope.rating
             };
             Movies.edit($scope.movieIndex, movie);
-        };
+        }
         $scope.title = '';
         $scope.genre = '';
         $scope.rating = '';
@@ -123,5 +124,6 @@ MovieApp.controller('MovieAbmCtrl', ['$scope', '$routeParams', 'Movies', functio
 
     if ($scope.action != 'add') {
         this.setMovieScope(Movies.getAtIndex($scope.movieIndex));
-    };
+    }
+    ;
 }]);
