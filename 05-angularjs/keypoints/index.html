@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MovieApp">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Maximiliano Tulian" />
+    <meta name="description" content="Exercise 5_*" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MVC - AngularJS</title>
+    <link rel="stylesheet" href="css/normalize.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body class="bg-success">
+        <header>
+            <h1 class="text-center">Welcome to angular</h1>
+        </header>
+
+        <div class="container" ng-class="row">
+            <div class="col-md-2">
+
+            </div>
+            <!-- scope: MovieListCtrl -->
+            <section ng-controller="MovieListCtrl" class="col-md-5">
+                <movie-details></movie-details>
+            </section>
+            <!-- scope: MovieAbmCtrl -->
+            <section class="col-md-5" >
+                <h3>ABM movie</h3>
+                <a href="#/index/{{'null'}}/action/{{ 'add' }}">Add</a>
+                <div ng-view>
+
+                </div>
+            </section>
+            <!-- /scope: MovieAbmCtrl -->
+    </div>
+
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="js/api.js"></script>
+</body>
+</html>
